@@ -23,8 +23,9 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', (message, callback) => {
     console.log(`createMessage: ${JSON.stringify(message)}`);
-    // set message only to others
-    socket.broadcast.emit('newMessage',
+    // set message only to others with
+    // socket.broadcast.emit instead of io.emit
+    io.emit('newMessage',
       generateMessage(message.from, message.text));
       callback('This is from the server.');
   });
